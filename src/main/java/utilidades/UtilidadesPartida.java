@@ -10,11 +10,11 @@ import java.time.temporal.TemporalUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class UtilidadesPartida implements IUtilidadesPartida{
+public class UtilidadesPartida {
 
 
 
-    public void inicializarPartida(Partida partida, List<Jugador> participantes, List<Personaje> personajesDisponibles) {
+    public static void inicializarPartida(Partida partida, List<Jugador> participantes, List<Personaje> personajesDisponibles) {
 
         //Realizar las elecciones
         Map<Jugador, Personaje> elecciones = new HashMap<>();
@@ -57,7 +57,7 @@ public class UtilidadesPartida implements IUtilidadesPartida{
     }
 
 
-    public void finalizarPartida(Partida partida, Integer equipoVencedor) {
+    public static void finalizarPartida(Partida partida, Integer equipoVencedor) {
 
         //Establece fechaFin
         partida.setFinPartida(LocalDateTime.now());

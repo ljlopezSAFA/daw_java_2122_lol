@@ -1,10 +1,7 @@
 package utilidades;
 
 import com.opencsv.CSVReader;
-import modelos.Habilidad;
-import modelos.Item;
-import modelos.Personaje;
-import modelos.TipoHabilidad;
+import modelos.*;
 
 import java.io.File;
 import java.io.FileReader;
@@ -30,7 +27,7 @@ public class UtilidadesFichero {
 
 
         try {
-            reader = new CSVReader(new FileReader(filePath + "/src/main/java/documentos/personajes.csv"),SEPARATOR,QUOTE);
+            reader = new CSVReader(new FileReader(filePath + "\\src\\main\\java\\documentos\\personajes.csv"),SEPARATOR,QUOTE);
             String[] nextLine= null ;
             int count = 0;
 
@@ -46,7 +43,7 @@ public class UtilidadesFichero {
                     p.setDefensaBase(Double.valueOf(valores[4]));
                     p.setVidaBase(Double.valueOf(valores[5]));
                     p.setManaBase(Double.valueOf(valores[6]));
-                    UtilidadesPersonaje.levelTo(p,1);
+                    p.setRegion(Region.valueOf(valores[7]));
                     personaje.add(p);
                 }
 
@@ -73,7 +70,7 @@ public class UtilidadesFichero {
 
 
         try {
-            reader = new CSVReader(new FileReader(filePath + "/src/main/java/documentos/items.csv"),SEPARATOR,QUOTE);
+            reader = new CSVReader(new FileReader(filePath + "\\src\\main\\java\\documentos\\items.csv"),SEPARATOR,QUOTE);
             String[] nextLine= null ;
             int count = 0;
 
@@ -111,7 +108,7 @@ public class UtilidadesFichero {
 
         List<Personaje> personajes = leerPersonajes();
         Map<Integer,List<Habilidad>> habilidadesPorPersonaje = leerHabilidades();
-        personajes.stream().filter(p-> habilidadesPorPersonaje.containsKey(p.getId())).forEach(p-> p.getHabilidad().addAll(habilidadesPorPersonaje.get(p.getId())));
+        personajes.stream().filter(p-> habilidadesPorPersonaje.containsKey(p.getId())).forEach(p-> p.setHabilidad(new ArrayList<>(habilidadesPorPersonaje.get(p.getId()))));
         return  personajes;
 
     }
@@ -123,7 +120,7 @@ public class UtilidadesFichero {
 
 
         try {
-            reader = new CSVReader(new FileReader(filePath + "/src/main/java/documentos/habilidades.csv"),SEPARATOR,QUOTE);
+            reader = new CSVReader(new FileReader(filePath + "\\src\\main\\java\\documentos\\habilidades.csv"),SEPARATOR,QUOTE);
             String[] nextLine= null ;
             int count = 0;
 
